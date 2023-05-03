@@ -1,4 +1,4 @@
-# DiscoMIDI: Audio Matching via DTW Alignment
+# DiscoMIDI: Audio to MIDI Matching via DTW Alignment
 
   Files and features:
 
