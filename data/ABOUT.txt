@@ -1,0 +1,4 @@
+Here should be the organized data of the MusicNet Dataset.
+You can use the organize.ipynb notebook to put together an organized version of the dataset from the 
+original download. 
+After this you can run synthesize.py to also store the synthesized versions of the .mid files.
