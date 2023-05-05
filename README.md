@@ -2,7 +2,7 @@
 
   Files and features:
 
-    prune.py: Contains the core functions for computing CQT, hashing CQT, and matching audio files using DTW.
+    prune.py: Contains the core functions for computing CQT and chroma features, hashing them, and matching audio files using DTW.
     matching.py: Contains functions for aligning and matching audio files using chroma and spectral features.
     utils.py: Contains utility functions for the project.
     
