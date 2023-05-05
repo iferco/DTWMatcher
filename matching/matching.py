@@ -164,37 +164,35 @@ def dtw_score_norm_l2(dtw_score, x, y):
 ##################################
 #           MATCHING             #
 #Do this with all midi files
-def matching(midi_files, performance_path,duration):
+
+import concurrent.futures
+
+def process_score(score_path, performance_path, duration):
+    alignment_cost = align_chroma(score_path, performance_path, n_fft=4096, duration=duration)
+    name = get_full_name(score_path)
+    return (name, alignment_cost)
+
+def matching(midi_files, performance_path, duration):
     """
     Params:
         midi_files: list of midi files
         performance_path: path to performance audio file
         duration: duration of the audio file
     Returns:
-            position: position of the performance (wanted track) in the list of midi files.
-            -1 if not found, 0 if first, 1 if second, etc.
+            scosts: list of tuples (midi_file_name, cost) ordered by cost (ascending)
     The alignment is done using the chroma features of the midi files and the performance 
     to get the DTW cost of alignment. The cost is then normalized and returned .
     """
-    #print('Matching...')
-    costs=[]
-    for score_path in midi_files:
-        alignment_cost = align_chroma(score_path,performance_path,n_fft=4096,duration=duration)
-        name=get_full_name(score_path)
-        costs.append((alignment_cost, name))
-        
-
-    name=performance_path.split('/')[-1].split('.')[0]
-
-    wanted_composition=get_full_name(performance_path)
-    #print('Wanted score: ', wanted_composition[0], 'Movement: ', wanted_composition[1] )
-
-    #print('Top 10 matches: ')
-    #ordered, let's print top 3
-    count=0
-    s_costs=sorted(costs)
-    s_costs=[x[1] for x in s_costs]
-    return get_position(s_costs, wanted_composition[0], wanted_composition[1])
+    costs = []
+    
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        results = [executor.submit(process_score, score_path, performance_path, duration) for score_path in midi_files]
+        for future in concurrent.futures.as_completed(results):
+            costs.append(future.result())
+    
+    #s_costs is a list of name, cost ordered by cost (ascending)
+    s_costs = sorted(costs, key=lambda x: x[1])
+    return s_costs
 
 
 def matching_spectral(midi_files, performance_path,duration):
@@ -231,7 +229,6 @@ def matching_spectral(midi_files, performance_path,duration):
 
 
 
- 
 
 
 ##################################

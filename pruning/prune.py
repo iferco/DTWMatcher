@@ -114,4 +114,22 @@ def find_top_matches(hashed_cqt, hashed_cqt_dict, top_n=115):
     top_matches = [(list(hashed_cqt_dict.keys())[idx], cost) for idx, cost in sorted_dtw_costs[:top_n]]
     return top_matches
 
+def create_hashed_cqt_dict(audio_folder):
+    """
+    Creates a dictionary to store the hashed CQTs of the database.
+    Params:
+        audio_folder: Path to the folder containing the audio files.
+    """
+    hashed_cqt_dict = {}
+    for file_name in os.listdir(audio_folder):
+        if file_name.endswith(".wav"):
+            file_path = os.path.join(audio_folder, file_name)
+            cqt = compute_cqt(file_path)
+            hashed_cqt = hash_cqt(cqt)
 
+            id=file_name.split(".")[0]
+            id=id.split("_")[0]
+            
+            save_hashed_cqt(hashed_cqt, id, hashed_cqt_dict)
+    print("Feature dict created")
+    return hashed_cqt_dict

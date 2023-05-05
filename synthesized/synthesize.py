@@ -2,12 +2,8 @@ from midi2audio import FluidSynth
 "#First, we create the composition folders:\n",
 import os
 midi_list=[]
-for root, dirs, files in os.walk("."):
+for root, dirs, files in os.walk("/data"):
     for dir in dirs:
-        #print(dir)
-        #Get from df all compositions who has dir as composer
-        #get all files that end in .mid inside of dir
-        #and print it
         for root, dirs, files in os.walk(dir):
             for file in files:
                 if file.endswith(".mid"):
@@ -36,7 +32,7 @@ def synthesize(midi_path):
 
     fs.midi_to_audio(midi_path,audio_name)
     # Move the generated WAV file to the wav_songs folder
-    os.rename(audio_name, 'wav_songs\\'+audio_name.split('\\')[-1])
+    os.rename(audio_name, 'data\\synthesized_data\\'+audio_name.split('\\')[-1])
 
 
 """
