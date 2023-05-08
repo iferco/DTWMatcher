@@ -30,7 +30,7 @@ my_list=My_DTW_instance.identify_score(input_features)
 #print top 10
 for i in range(10):
     print(my_list[i])
-print(id)
-print(my_list[0])
+print("We want id: ", id)
+print("Our top match is: ", my_list[0])
 
 
