@@ -1,5 +1,5 @@
 from midi2audio import FluidSynth
-"#First, we create the composition folders:\n",
+
 import os
 midi_list=[]
 for root, dirs, files in os.walk("/data"):
