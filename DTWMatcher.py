@@ -23,8 +23,9 @@ class DTWMatcher:
         chroma_features = librosa.feature.chroma_stft(y=audio_frame, sr=sr, tuning=0, norm=2,
                                                 hop_length=stride, n_fft=n_fft)
         
-        chroma_logch = librosa.power_to_db(chroma_features, ref=chroma_features.max())
-        return chroma_logch
+        #chroma_logch = librosa.power_to_db(chroma_features, ref=chroma_features.max())
+        #Lin's work uses the amplitude in linear scale, so... let's return that
+        return chroma_features
 
     
 
@@ -80,7 +81,7 @@ class DTWMatcher:
 
 
 #Outside class
-def create_database(MatcherInstance, audio_folder, duration=None):
+def create_database(MatcherInstance, audio_folder, duration=None, n_fft=2048, stride=512):
     """
     Creates a dictionary to store the hashed chroma features of the database.
     Params:
@@ -98,9 +99,9 @@ def create_database(MatcherInstance, audio_folder, duration=None):
             audio_frame, sr = librosa.load(file_path, sr=44100, duration=duration)
 
             if duration is None:
-                features = MatcherInstance.extract_features(audio_frame, sr=44100)
+                features = MatcherInstance.extract_features(audio_frame, sr=44100, n_fft=n_fft, stride=stride)
             else:
-                features = MatcherInstance.extract_features(audio_frame, sr=44100)
+                features = MatcherInstance.extract_features(audio_frame, sr=44100, n_fft=n_fft, stride=stride)
             
             id = file_name.split(".")[0]
             id = id.split("_")[0]
