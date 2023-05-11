@@ -2,3 +2,16 @@ Here should be the organized data of the MusicNet Dataset, which can be download
 You can use the organize.ipynb notebook to put together an organized version of the dataset from the original download. 
 
 After this you can run synthesize.py to also have the synthesized versions of the .mid files.
+
+
+IDs of badly annotated MIDIs:
+2570
+2194
+2572
+2211
+2573
+2227
+2305
+2292
+2310
+2230
