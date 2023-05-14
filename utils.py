@@ -55,14 +55,6 @@ def random_composition_performance():
     #print('Performance file: ', performance_path)
     #Now we will get all possible midi files from the Schubert folder
 
-
-
-    #print('Number of midi files to match our objective performance to: ', len(midi_files))
-    #The performance we seek is:
-    file_name=performance_path.split('/')[-1]
-    name=get_composition(file_name.split('.')[0])
-    #get from filename the movement of the composition
-    movement=musicnet_df.loc[musicnet_df['id'] == int(file_name.split('.')[0])]['movement'].values[0]
     return (performance_path)
 
 
@@ -153,6 +145,19 @@ def get_position(list,composition, movement):
     """
     for i in range(len(list)):
         if list[i][0]==composition and list[i][1]==movement:
+            return i
+    return -1
+
+def get_position_id(list,id):
+    """
+    Param: 
+        list: Tuple list of id, cost.
+        id: id of the wanted element.
+    Returns: 
+        position of the element in the list. Or -1 if not found.
+    """
+    for i in range(len(list)):
+        if list[i][0]==id:
             return i
     return -1
 

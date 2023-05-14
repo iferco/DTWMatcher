@@ -4,12 +4,12 @@ from scipy.signal import get_window
 import os
 from utils import *
 
-class DTWMatcher:
+class EALD_DTW:
 
     def __init__(self, database):
         self.database = database
 
-    def extract_features(self, audio_frame, sr=44100, stride=512, n_fft=4096, mode='chroma'):
+    def extract_features(self, audio_frame, sr=44100, stride=512, n_fft=2048, mode='chroma'):
         """
         Extracts the chroma/CQT features from the audio frame.
         Params:
@@ -23,14 +23,12 @@ class DTWMatcher:
         if mode == 'chroma':
             features = librosa.feature.chroma_stft(y=audio_frame, sr=sr, tuning=0, norm=2,
                                                     hop_length=stride, n_fft=n_fft)
-            #features = librosa.power_to_db(features, ref=features.max())
+            #chroma_logch = librosa.power_to_db(chroma_features, ref=chroma_features.max())
             #Lin's work uses the amplitude in linear scale, so... let's return that
             #normalize the chroma features to have a mean of 0 and a variance of 1
-            """
             features_mean = np.mean(features, axis=1, keepdims=True)
             features_std = np.std(features, axis=1, keepdims=True)
             features = (features - features_mean) / features_std
-            """
 
             
         if mode == 'cqt':
@@ -41,7 +39,7 @@ class DTWMatcher:
 
     
 
-    def compute_dtw(self, audio_features, score_features):
+    def compute_dtw(self, audio_features, score_features,epsilon):
         """
         Computes the DTW between the audio and score features using librosa's 
         implementation for DTW.
@@ -52,7 +50,7 @@ class DTWMatcher:
                 D: DTW matrix.
                 wp: Warping path.
         """
-        D, wp = librosa.sequence.dtw(X=audio_features, Y=score_features, metric='euclidean')
+        D, wp = librosa.sequence.dtw(X=audio_features, Y=score_features, metric='euclidean',epsilon=epsilon)
         return D,wp
 
     def average_distance(self,D, wp):
@@ -69,7 +67,7 @@ class DTWMatcher:
         avg_distance = distance / path_length
         return avg_distance
     
-    def identify_score(self, audio_frames):
+    def identify_score(self, audio_frames, epsilon=None):
         """
         Matches given query to all features in the database using DTW.
         Params:
@@ -85,15 +83,19 @@ class DTWMatcher:
             #print(count)
             count+=1 # just to keep track of how long it takes
 
-            dtw_matrix, wp = self.compute_dtw(audio_frames, score_features)
-            cost=self.average_distance(dtw_matrix, wp)
+            dtw_matrix, wp = self.compute_dtw(audio_frames, score_features,epsilon)
+            if dtw_matrix is None:
+                print("early abandoning " , score_id)
+                cost=np.inf
+            else:
+                cost=self.average_distance(dtw_matrix, wp)
             results.append((score_id, cost))
 
         return sorted(results, key=lambda x: x[1])
 
 
 #Outside class
-def create_database(MatcherInstance, audio_folder, duration=None, n_fft=4096, stride=512, mode='chroma'):
+def create_database(MatcherInstance, audio_folder, duration=None, n_fft=2048, stride=512, mode='chroma'):
     """
     Creates a dictionary to store the hashed chroma features of the database.
     Params:
