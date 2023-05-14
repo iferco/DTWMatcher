@@ -23,45 +23,38 @@ id,composer,composition,movement,ensemble,source,transcriber,catalog_name,second
 1775,Schubert,Piano Sonata in D major,1. Allegro vivace,Solo Piano,Museopen,Segundo G. Yogore,D850,578
 1776,Schubert,Piano Sonata in D major,2. Con moto,Solo Piano,Museopen,Segundo G. Yogore,D850,726
 1777,Schubert,Piano Sonata in D major,3. Scherzo. Allegro vivace,Solo Piano,Museopen,Segundo G. Yogore,D850,629
-2194,Bach,"WTK I, No. 13: Prelude and Fugue in F-sharp major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV858,100
-2195,Bach,"WTK I, No. 3: Prelude and Fugue in C-sharp major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV848,155
-2196,Bach,"WTK I, No. 3: Prelude and Fugue in C-sharp major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV848,75
-2198,Bach,"WTK I, No. 22: Prelude and Fugue in B-flat minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV867,197
-2200,Bach,"WTK I, No. 16: Prelude and Fugue in G minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV861,113
-2201,Bach,"WTK I, No. 16: Prelude and Fugue in G minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV861,134
-2207,Bach,"WTK I, No. 10: Prelude and Fugue in E minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV855,89
-2208,Bach,"WTK I, No. 10: Prelude and Fugue in E minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV855,120
-2209,Bach,"WTK I, No. 4: Prelude and Fugue in C-sharp minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV849,160
-2210,Bach,"WTK I, No. 4: Prelude and Fugue in C-sharp minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV849,178
-2211,Bach,"WTK I, No. 12: Prelude and Fugue in F minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV857,237
-2212,Bach,"WTK I, No. 12: Prelude and Fugue in F minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV857,173
-2213,Bach,"WTK I, No. 2: Prelude and Fugue in C minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV847,115
-2214,Bach,"WTK I, No. 2: Prelude and Fugue in C minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV847,107
-2215,Bach,"WTK I, No. 1: Prelude and Fugue in C major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV846,116
-2224,Bach,"WTK I, No. 7: Prelude and Fugue in E-flat major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV852,108
-2225,Bach,"WTK I, No. 7: Prelude and Fugue in E-flat major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV852,213
-2227,Bach,"WTK I, No. 6: Prelude and Fugue in D minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV851,129
-2228,Bach,"WTK I, No. 6: Prelude and Fugue in D minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV851,98
-2229,Bach,"WTK I, No. 20: Prelude and Fugue in A minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV865,244
-2230,Bach,"WTK I, No. 20: Prelude and Fugue in A minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV865,84
-2231,Bach,"WTK I, No. 21: Prelude and Fugue in B-flat major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV866,115
-2232,Bach,"WTK I, No. 21: Prelude and Fugue in B-flat major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV866,78
-2234,Bach,"WTK I, No. 11: Prelude and Fugue in F major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV856,64
-2237,Bach,"WTK I, No. 23: Prelude and Fugue in B major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV868,109
-2238,Bach,"WTK I, No. 23: Prelude and Fugue in B major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV868,60
-2239,Bach,"WTK I, No. 17: Prelude and Fugue in A-flat major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV862,120
-2240,Bach,"WTK I, No. 17: Prelude and Fugue in A-flat major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV862,92
-2247,Bach,"WTK I, No. 9: Prelude and Fugue in E major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV854,81
-2248,Bach,"WTK I, No. 9: Prelude and Fugue in E major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV854,104
-2292,Bach,"WTK I, No. 19: Prelude and Fugue in A major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV864,91
-2300,Bach,"WTK I, No. 8: Prelude and Fugue in E-flat minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV853,238
-2302,Bach,"WTK I, No. 5: Prelude and Fugue in D major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV850,108
-2303,Bach,"WTK I, No. 5: Prelude and Fugue in D major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV850,92
-2304,Bach,"WTK I, No. 14: Prelude and Fugue in F-sharp minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV859,196
-2305,Bach,"WTK I, No. 14: Prelude and Fugue in F-sharp minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV859,65
-2307,Bach,"WTK I, No. 18: Prelude and Fugue in G-sharp minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV863,137
-2308,Bach,"WTK I, No. 18: Prelude and Fugue in G-sharp minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV863,121
-2310,Bach,"WTK I, No. 15: Prelude and Fugue in G major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV860,55
+2195,Bach,"WTK I, No 3: Prelude and Fugue in C-sharp major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV848,155
+2196,Bach,"WTK I, No 3: Prelude and Fugue in C-sharp major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV848,75
+2198,Bach,"WTK I, No 22: Prelude and Fugue in B-flat minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV867,197
+2200,Bach,"WTK I, No 16: Prelude and Fugue in G minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV861,113
+2201,Bach,"WTK I, No 16: Prelude and Fugue in G minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV861,134
+2207,Bach,"WTK I, No 10: Prelude and Fugue in E minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV855,89
+2208,Bach,"WTK I, No 10: Prelude and Fugue in E minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV855,120
+2209,Bach,"WTK I, No 4: Prelude and Fugue in C-sharp minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV849,160
+2210,Bach,"WTK I, No 4: Prelude and Fugue in C-sharp minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV849,178
+2212,Bach,"WTK I, No 12: Prelude and Fugue in F minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV857,173
+2213,Bach,"WTK I, No 2: Prelude and Fugue in C minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV847,115
+2214,Bach,"WTK I, No 2: Prelude and Fugue in C minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV847,107
+2215,Bach,"WTK I, No 1: Prelude and Fugue in C major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV846,116
+2224,Bach,"WTK I, No 7: Prelude and Fugue in E-flat major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV852,108
+2225,Bach,"WTK I, No 7: Prelude and Fugue in E-flat major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV852,213
+2228,Bach,"WTK I, No 6: Prelude and Fugue in D minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV851,98
+2229,Bach,"WTK I, No 20: Prelude and Fugue in A minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV865,244
+2231,Bach,"WTK I, No 21: Prelude and Fugue in B-flat major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV866,115
+2232,Bach,"WTK I, No 21: Prelude and Fugue in B-flat major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV866,78
+2234,Bach,"WTK I, No 11: Prelude and Fugue in F major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV856,64
+2237,Bach,"WTK I, No 23: Prelude and Fugue in B major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV868,109
+2238,Bach,"WTK I, No 23: Prelude and Fugue in B major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV868,60
+2239,Bach,"WTK I, No 17: Prelude and Fugue in A-flat major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV862,120
+2240,Bach,"WTK I, No 17: Prelude and Fugue in A-flat major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV862,92
+2247,Bach,"WTK I, No 9: Prelude and Fugue in E major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV854,81
+2248,Bach,"WTK I, No 9: Prelude and Fugue in E major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV854,104
+2300,Bach,"WTK I, No 8: Prelude and Fugue in E-flat minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV853,238
+2302,Bach,"WTK I, No 5: Prelude and Fugue in D major",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV850,108
+2303,Bach,"WTK I, No 5: Prelude and Fugue in D major",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV850,92
+2304,Bach,"WTK I, No 14: Prelude and Fugue in F-sharp minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV859,196
+2307,Bach,"WTK I, No 18: Prelude and Fugue in G-sharp minor",2. Fugue,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV863,137
+2308,Bach,"WTK I, No 18: Prelude and Fugue in G-sharp minor",1. Prelude,Solo Piano,Kimiko Ishizaka,www.bachcentral.com,BWV863,121
 2322,Beethoven,Piano Sonata No 23 in F minor,1. Allegro assai,Solo Piano,Paul Pitman,piano-midi.de,OP57,645
 2325,Beethoven,Piano Sonata No 23 in F minor,1. Allegro assai,Solo Piano,European Archive,piano-midi.de,OP57,551
 2343,Beethoven,Piano Sonata No 14 in C-sharp minor,1. Adagio sostenuto,Solo Piano,Stefano Ligoratti,piano-midi.de,OP27NO2,332
