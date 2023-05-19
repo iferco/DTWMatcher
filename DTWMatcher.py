@@ -12,6 +12,7 @@ class DTWMatcher:
     def extract_features(self, audio_frame, sr=44100, stride=512, n_fft=4096, mode='chroma'):
         """
         Extracts the chroma/CQT features from the audio frame.
+
         Params:
             audio_frame: Audio frame to extract the features from.
             sr: Sample rate of the audio frame.
@@ -45,6 +46,7 @@ class DTWMatcher:
         """
         Computes the DTW between the audio and score features using librosa's 
         implementation for DTW.
+
         Params:
             audio_features: Features extracted from the audio frame.
             score_features: Features extracted from the score frame.
@@ -58,6 +60,7 @@ class DTWMatcher:
     def average_distance(self,D, wp):
         """
         Computes the average distance between the audio and score features.
+
         Params:
             D: DTW matrix.
             wp: Warping path.
@@ -72,6 +75,7 @@ class DTWMatcher:
     def identify_score(self, audio_frames):
         """
         Matches given query to all features in the database using DTW.
+         
         Params:
             audio_frames: Audio frame to identify.
             Returns:
@@ -96,6 +100,7 @@ class DTWMatcher:
 def create_database(MatcherInstance, audio_folder, duration=None, n_fft=4096, stride=512, mode='chroma'):
     """
     Creates a dictionary to store the hashed chroma features of the database.
+
     Params:
         audio_folder: Path to the folder containing the audio files.
         duration: Duration of the audio files wanted to be loaded.

@@ -29,7 +29,7 @@ st = time.time()
 input_features = My_DTW_instance.extract_features(input_audio, sr=44100,  mode='chroma')
 
 # Identify the score with the lowest distance to the input audio
-my_list=My_DTW_instance.identify_score(input_features,epsilon=6500)
+my_list=My_DTW_instance.identify_score(input_features,epsilon=10000)
 
 
 #end timer
@@ -40,7 +40,7 @@ elapsed_time = et - st
 print('Execution time:', elapsed_time, 'seconds')
 
 #print top 10
-for i in range(len(my_list)):
+for i in range(10):
     print(my_list[i])
 print("We want id: ", id)
 print("Our top match is: ", my_list[0])

@@ -22,6 +22,36 @@ def get_accuracy(list_match_pos):
     accuracy = accuracy/len(list_match_pos)
     return accuracy*100
 
+def top_10_num_matches(list_match_pos):
+    """
+    Get the number of times that the correct composition is in the top 10 positions
+    Params:
+        list_match_pos: list of positions of the matched compositions
+    Returns:
+        top_10_num_matches: number of times that the correct composition is in the top 10 positions
+    """
+    top_10_num_matches = 0
+    for pos in list_match_pos:
+        if pos < 10:
+            top_10_num_matches += 1
+    return top_10_num_matches
+
+def mean_top_10_pos(list_match_pos):
+    """
+    Get the mean position of the correct composition in the top 10 positions
+    Params:
+        list_match_pos: list of positions of the matched compositions
+    Returns:
+        mean_top_10_pos: mean position of the correct composition in the top 10 positions
+    """
+    top_10_pos = []
+    for pos in list_match_pos:
+        if pos < 10:
+            top_10_pos.append(pos) 
+    return np.mean(top_10_pos)
+
+
+
 
 def ndcg_at_k(positions, k=10):
     """
@@ -39,6 +69,8 @@ def ndcg_at_k(positions, k=10):
         elif pos < k:  # adjusting for 0-indexing
             dcg = 1 / np.log2(pos + 1 + 1)  # pos + 1 for 0-indexing, and another + 1 because log is undefined at 0
             idcg = 1  # Ideal DCG is 1 because the relevance of the correct match is 1
+            #TODO Should idcg be 1 just for items in pos 0? What values to set for the rest?
+
             ndcgs.append(dcg / idcg)
         else:  # pos >= k
             ndcgs.append(0)
@@ -46,59 +78,5 @@ def ndcg_at_k(positions, k=10):
 
 
 
-def test_base_dtw(duration,mode='chroma', iterations=100):
-    """
-    This function tests the baseline DTW matching algorithm for different durations of the input audio.
-    Params:
-        duration: seconds of the audio to be tested
-        mode: chroma or cqt for baseline DTW
-        iterations: number of iterations to perform the matching experiment.
-    Returns:
-        length: list of tuples with the duration of the audio and the time it took to match it
-        position_list: list of positions of the correct match for different iterations
-    """
-    length=[]
-    position_list=[]
-    for i in range(iterations):
-        #print("Testing for duration of: ", duration)
-        input_file_path = random_composition_performance()
-        id = input_file_path.split(".")[0]
-        id = id.split("/")[-1]
-        #print("Looking for ", input_file_path, "id: ", id)
-        # Load the audio data from the input file
-        input_audio, sr = librosa.load(input_file_path, sr=44100, duration=duration)
-        if i == 0:
-            # Create a DTWMatcher instance
-            My_DTW_instance = DTWMatcher(database={})
-            # This function returns a dictionary containing the chroma features of the database
-            # The keys are the ids of the scores and the values are the chroma features
-            database = create_database(My_DTW_instance,audio_folder,duration=duration, mode=mode)
-            My_DTW_instance = DTWMatcher(database=database)
-            #star timer
-            st = time.time()
-            # Extract the features of the input audio
-            input_features = My_DTW_instance.extract_features(input_audio, sr=44100, mode=mode)
-            # Identify the score with the lowest distance to the input audio
-            my_list=My_DTW_instance.identify_score(input_features)
 
 
-            #end timer
-            et = time.time()
-
-            # get the execution time
-            elapsed_time = et - st
-            length.append((duration, elapsed_time))
-            #print('Execution time:', elapsed_time, 'seconds')
-            """
-            #print top 10
-            for i in range(10):
-                print(my_list[i])
-            print("We want id: ", id)
-            print("Our top match is: ", my_list[0])
-            """
-            position=get_position_id(my_list, id)
-            #print("Match found in position: ", position )
-            position_list.append(position)
-
-        return length, position_list
-            
