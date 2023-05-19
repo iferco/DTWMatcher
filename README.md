@@ -1,4 +1,4 @@
-# DiscoMIDI: Audio to MIDI Matching via DTW Alignment
+# DTWMatcher: Audio to MIDI Matching via DTW Alignment
 
   Files and features:
     DTWMatcher.py: Contains functions for aligning and matching audio files using chroma features.
