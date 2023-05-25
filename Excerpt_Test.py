@@ -104,8 +104,8 @@ print("Number of top 10 matches: ", top_10_num_matches(position_list))
 print("Average of top 10 matches: ", mean_top_10_pos(position_list))
  
 #Evaluation of 35 second results:
-length, position_list=test_base_dtw(35)
-print("Evaluation of 35 second results:")
+length, position_list=test_base_dtw(30)
+print("Evaluation of 30 second results:")
 
 print("Accuracy: ", get_accuracy(position_list), " %")
 print("NCDG: ", ndcg_at_k(position_list))
@@ -114,3 +114,15 @@ print("Average time: ", sum([i[1] for i in length])/len(length))
 print("Number of top 10 matches: ", top_10_num_matches(position_list))
 print("Average of top 10 matches: ", mean_top_10_pos(position_list))
  
+
+  
+#Evaluation of 35 second results:
+length, position_list=test_base_dtw(120)
+print("Evaluation of 120 second results:")
+
+print("Accuracy: ", get_accuracy(position_list), " %")
+print("NCDG: ", ndcg_at_k(position_list))
+
+print("Average time: ", sum([i[1] for i in length])/len(length))
+print("Number of top 10 matches: ", top_10_num_matches(position_list))
+print("Average of top 10 matches: ", mean_top_10_pos(position_list))
