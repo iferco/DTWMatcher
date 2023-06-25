@@ -35,6 +35,29 @@ def random_schubert_composition_performance():
     movement=musicnet_df.loc[musicnet_df['id'] == int(file_name.split('.')[0])]['movement'].values[0]
     return (performance_path)
 
+def random_lakh_song():
+    """
+    Get a random song from the Lakh Aligned dataset.
+    """
+    path_to_lakh = 'lakh_data/matched_mp3'
+
+    #Inside of path_to_schubert there are composition folders with many wav files. Pick a random one and print file name
+    random_lakh = np.random.choice(os.listdir(path_to_lakh))
+    
+    #get full path to this file
+    performance_path = os.path.join(path_to_lakh, random_lakh)
+
+
+    return performance_path
+
+def get_lakh_position(list,name):
+    """
+    Get the position of a song in the Lakh dataset
+    """
+    for i in range(len(list)):
+        if name in list[i]:
+            return i
+    return -1
 
 def random_composition_performance():
     """
@@ -146,6 +169,9 @@ def get_position(list,composition, movement):
     for i in range(len(list)):
         if list[i][0]==composition and list[i][1]==movement:
             return i
+    #Print id of non found composition
+    #add missing compositions to the missing.txt file
+
     return -1
 
 def get_position_id(list,id):

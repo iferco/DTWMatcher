@@ -77,6 +77,72 @@ def ndcg_at_k(positions, k=10):
     return np.mean(ndcgs)
 
 
+def calculate_p_at_10(match_positions, iterations=100):
+    """
+    Calculate Precision at rank 10 (P@10).
+    Parameters:
+        match_positions: list of positions of the correct match for different iterations
+    Returns:
+        float, the average P@10
+    """
+    p_at_10 = 0
+    for match in match_positions:
+        if match < 10:  # Count matches that occurred in top-10
+            p_at_10 += 1
+
+    # Normalize P@10 by the total number of cases we checked (up to 10)
+    p_at_10 /= iterations  # 330 is the total number of cases we checked
+
+    return p_at_10
+
+
+def calculate_mrr(match_positions):
+    """
+    Calculate Mean Reciprocal Rank (MRR).
+    Parameters:
+        match_positions: list of positions of the correct match for different iterations
+        Returns:
+        float, the average MRR
+    """
+    # Initialize sum of reciprocal ranks
+    sum_reciprocal_ranks = 0
+
+    # Count the number of experiments where a match was found
+    count_valid_experiments = 0
+
+    # For MR1, consider the first match of each experiment
+    for match in match_positions:
+        if match is not None and match >= 0:  # Ignore experiments where no match was found
+            sum_reciprocal_ranks += 1 / (match + 1)  # add 1 to match because index starts from 0
+            count_valid_experiments += 1
+
+    if count_valid_experiments == 0:
+        return None  # or whatever you want to return in this case
+
+    # Calculate MRR by taking the average of reciprocal ranks
+    mr1 = sum_reciprocal_ranks / count_valid_experiments
+
+    return mr1
 
 
 
+
+def calculate_mr1(match_positions):
+    """
+    Calculate Mean Reciprocal Rank (MRR) at rank 1.
+    Parameters:
+        match_positions: list of positions of the correct match for different iterations
+    Returns:
+        float, the average MRR at rank 1
+    """
+    # Count the number of experiments where the match was found at the first position
+    count_first_position_matches = match_positions.count(0)
+
+    # If no matches were found at the first position, return None or another appropriate value
+    if count_first_position_matches == 0:
+        return None 
+
+    # Calculate MR1 by dividing the number of first position matches by the total number of experiments
+    mr1 = count_first_position_matches / len(match_positions)
+
+    return mr1

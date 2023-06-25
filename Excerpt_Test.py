@@ -9,9 +9,9 @@ import pickle
 
 
 audio_folder='./data/synthesized_data'
-duration_l=[1, 3, 6, 15, 35, 120]
+duration_l=[1, 5, 15, 30]
 
-mode='chroma'
+mode='cqt'
 
 def test_base_dtw(duration,mode='chroma', iterations=100):
         length=[]
@@ -43,7 +43,7 @@ def test_base_dtw(duration,mode='chroma', iterations=100):
             # Extract the features of the input audio
             input_features = My_DTW_instance.extract_features(input_audio, sr=44100, mode=mode)
             # Identify the score with the lowest distance to the input audio
-            my_list=My_DTW_instance.identify_score(input_features)
+            my_list=My_DTW_instance.identify_score(input_features, mode=mode)
 
 
             #end timer
@@ -70,32 +70,49 @@ def test_base_dtw(duration,mode='chroma', iterations=100):
 
 
 #test for different durations
-length, position_list=test_base_dtw(1)
+length, position_list=test_base_dtw(1,mode=mode)
+save_pk_file("position_list_1s",position_list)
+save_pk_file("length_1s",length)
+
 #Evaluation of 1 second results:
 print("Evaluation of 1 second results:")
 
 print("Accuracy: ", get_accuracy(position_list), " %")
+
 print("NCDG: ", ndcg_at_k(position_list))
 
 print("Average time: ", sum([i[1] for i in length])/len(length))
 print("Number of top 10 matches: ", top_10_num_matches(position_list))
 print("Average of top 10 matches: ", mean_top_10_pos(position_list))
- 
-length, position_list=test_base_dtw(5)
+print("P@10: " + str(calculate_p_at_10(position_list)) + "\n")
+print("MR1: "+ str(calculate_mr1(position_list))+ "\n")
+
+
+length, position_list=test_base_dtw(5,mode=mode)
+save_pk_file("position_list_5s", position_list)
+save_pk_file("length_5s",length)
+
 #Evaluation of 5 second results:
 print("Evaluation of 5 second results:")
-
+print("Number of top 10 matches: ", top_10_num_matches(position_list))
+print("Average of top 10 matches: ", mean_top_10_pos(position_list))
 print("Accuracy: ", get_accuracy(position_list), " %")
 print("NCDG: ", ndcg_at_k(position_list))
 
 print("Average time: ", sum([i[1] for i in length])/len(length))
+print("P@10: " + str(calculate_p_at_10(position_list)) + "\n")
+print("MR1: "+ str(calculate_mr1(position_list))+ "\n")
 
-length, position_list=test_base_dtw(15)
+length, position_list=test_base_dtw(15,mode=mode)
+save_pk_file("position_list_15s",position_list)
+save_pk_file("length_15s",length)
+
 #Evaluation of 15 second results:
 print("Evaluation of 15 second results:")
 print("Number of top 10 matches: ", top_10_num_matches(position_list))
 print("Average of top 10 matches: ", mean_top_10_pos(position_list))
- 
+
+
 print("Accuracy: ", get_accuracy(position_list), " %")
 print("NCDG: ", ndcg_at_k(position_list))
 
@@ -103,26 +120,20 @@ print("Average time: ", sum([i[1] for i in length])/len(length))
 print("Number of top 10 matches: ", top_10_num_matches(position_list))
 print("Average of top 10 matches: ", mean_top_10_pos(position_list))
  
-#Evaluation of 35 second results:
-length, position_list=test_base_dtw(30)
+#Evaluation of 30 second results:
+length, position_list=test_base_dtw(30,mode=mode)
+save_pk_file("position_list_30s",position_list)
+save_pk_file("length_30s",length)
 print("Evaluation of 30 second results:")
 
 print("Accuracy: ", get_accuracy(position_list), " %")
 print("NCDG: ", ndcg_at_k(position_list))
+print("P@10: " + str(calculate_p_at_10(position_list)) + "\n")
+print("MR1: "+ str(calculate_mr1(position_list))+ "\n")
 
 print("Average time: ", sum([i[1] for i in length])/len(length))
 print("Number of top 10 matches: ", top_10_num_matches(position_list))
 print("Average of top 10 matches: ", mean_top_10_pos(position_list))
  
 
-  
-#Evaluation of 35 second results:
-length, position_list=test_base_dtw(120)
-print("Evaluation of 120 second results:")
-
-print("Accuracy: ", get_accuracy(position_list), " %")
-print("NCDG: ", ndcg_at_k(position_list))
-
-print("Average time: ", sum([i[1] for i in length])/len(length))
-print("Number of top 10 matches: ", top_10_num_matches(position_list))
-print("Average of top 10 matches: ", mean_top_10_pos(position_list))
+ 
