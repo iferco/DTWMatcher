@@ -110,7 +110,6 @@ def calculate_mrr(match_positions):
     # Count the number of experiments where a match was found
     count_valid_experiments = 0
 
-    # For MR1, consider the first match of each experiment
     for match in match_positions:
         if match is not None and match >= 0:  # Ignore experiments where no match was found
             sum_reciprocal_ranks += 1 / (match + 1)  # add 1 to match because index starts from 0
@@ -120,9 +119,9 @@ def calculate_mrr(match_positions):
         return None  # or whatever you want to return in this case
 
     # Calculate MRR by taking the average of reciprocal ranks
-    mr1 = sum_reciprocal_ranks / count_valid_experiments
+    mrr = sum_reciprocal_ranks / count_valid_experiments
 
-    return mr1
+    return mrr
 
 
 

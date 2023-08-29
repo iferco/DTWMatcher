@@ -9,9 +9,10 @@ class EALD_DTW:
     def __init__(self, database):
         self.database = database
 
-    def extract_features(self, audio_frame, sr=44100, stride=512, n_fft=2048, mode='chroma'):
+    def extract_features(self, audio_frame, sr=44100, stride=512, n_fft=4096, mode='chroma' ):
         """
         Extracts the chroma/CQT features from the audio frame.
+
         Params:
             audio_frame: Audio frame to extract the features from.
             sr: Sample rate of the audio frame.
@@ -23,19 +24,36 @@ class EALD_DTW:
         if mode == 'chroma':
             features = librosa.feature.chroma_stft(y=audio_frame, sr=sr, tuning=0, norm=2,
                                                     hop_length=stride, n_fft=n_fft)
-            #chroma_logch = librosa.power_to_db(chroma_features, ref=chroma_features.max())
+            #features = librosa.power_to_db(features, ref=features.max())
             #Lin's work uses the amplitude in linear scale, so... let's return that
             #normalize the chroma features to have a mean of 0 and a variance of 1
+            """
             features_mean = np.mean(features, axis=1, keepdims=True)
             features_std = np.std(features, axis=1, keepdims=True)
             features = (features - features_mean) / features_std
+            """
 
-            
+        if mode == 'plain_cqt':
+            features = librosa.cqt(audio_frame, sr=sr, hop_length=stride, n_bins=84, bins_per_octave=12)
+            features=abs(features)
+            features = librosa.amplitude_to_db(features, ref=np.max)
         if mode == 'cqt':
-            features = librosa.cqt(y=audio_frame, sr=sr, hop_length=stride, n_bins=252, bins_per_octave=36)
+            '''
+            features = librosa.cqt(audio_frame, sr=sr, hop_length=stride, n_bins=84, bins_per_octave=12)
+            features=abs(features)
+            features = librosa.amplitude_to_db(features, ref=np.max)
+            '''
+            features = librosa.feature.chroma_cqt(y=audio_frame, sr=sr, hop_length=stride, n_chroma=12, n_octaves=7,bins_per_octave=36)
+        if mode =='spectral':
+            features = np.abs(librosa.stft(y=audio_frame, hop_length=stride, n_fft=n_fft))**2
+            features=abs(features)
+            features = librosa.amplitude_to_db(features, ref=np.max)
 
-
+        if mode =='hpcp':
+            features = hpcpgram(audio_frame, sampleRate=sr, hopSize=stride, frameSize=n_fft)
+            
         return features
+
 
     
 
@@ -62,14 +80,18 @@ class EALD_DTW:
         Returns:
             avg_distance: Average distance between the audio and score features.
         """
+        if wp is None:
+            return np.inf # if there is no warping path, return infinity, this means 
+            #early abandoning stopped the DTW
         path_length = len(wp)
         distance = sum([D[wp[i][0], wp[i][1]] for i in range(path_length)])
         avg_distance = distance / path_length
         return avg_distance
     
-    def identify_score(self, audio_frames, epsilon=None):
+    def identify_score(self, audio_frames, mode='chroma', epsilon=None):
         """
         Matches given query to all features in the database using DTW.
+         
         Params:
             audio_frames: Audio frame to identify.
             Returns:
@@ -80,20 +102,31 @@ class EALD_DTW:
         results = []
         count=0
         for score_id, score_features in self.database.items():
-            #print(count)
+            #Print score features shape and audio features shape
             count+=1 # just to keep track of how long it takes
-
             dtw_matrix, wp = self.compute_dtw(audio_frames, score_features,epsilon)
-            if dtw_matrix is None:
-                print("early abandoning " , score_id)
-                cost=np.inf
-            else:
+
+            if mode =='chroma':
                 cost=self.average_distance(dtw_matrix, wp)
+            else:
+                cost=dtw_matrix[-1,-1]
+                cost = self.dtw_score_norm_l2(cost, audio_frames, score_features)
             results.append((score_id, cost))
 
+
         return sorted(results, key=lambda x: x[1])
-
-
+    def dtw_score_norm_l2(self, dtw_score, x, y):
+        """
+        Normalizes the DTW score using the L2 norm.
+        Params:
+            dtw_score: DTW score.
+            x: Audio features.
+            y: Score features.
+        Returns:
+            norm_factor: Normalized DTW score.
+        """
+        norm_factor = np.sqrt(np.sum(np.square(x)) + np.sum(np.square(y)))
+        return dtw_score / norm_factor
 #Outside class
 def create_database(MatcherInstance, audio_folder, duration=None, n_fft=2048, stride=512, mode='chroma'):
     """

@@ -9,6 +9,22 @@ PATH_TO_DF='musicnet_metadata.csv'
 musicnet_df=pd.read_csv(PATH_TO_DF)
 
 
+def return_all_performance_ids():
+    """
+    Return all the ids of the performances in the dataset.
+    """
+    return musicnet_df['id'].values
+
+def get_ensemble(id):
+    """
+    Get the ensemble of a composition given its id.
+    Params:
+        id: id of the composition
+    Returns:
+        ensemble: ensemble of the composition
+    """
+    ensemble=musicnet_df.loc[musicnet_df['id'] == id]['ensemble'].values[0]
+    return ensemble
 
 def random_schubert_composition_performance():
     """
@@ -64,6 +80,8 @@ def random_composition_performance():
     Get a random  composition from the df. Requires the csv of the dataset to be located in the same folder as this script.
     This works with MusicNet dataset, the needed file is called musicnet_metadata.csv
     """
+    badly_annotated=[2570, 2194 ,2572 ,2211,2573,2227,2305,2292,2310,2230] #these compositions are badly annotated, we will not use them
+    
     list=['Bach','Beethoven','Brahms', 'Cambini', 'Dvorak', 'Faure', 'Haydn','Mozart', 'Ravel', 'Schubert']
     #get random element from list
     compositor=np.random.choice(list)
@@ -78,13 +96,38 @@ def random_composition_performance():
     #print('Performance file: ', performance_path)
     #Now we will get all possible midi files from the Schubert folder
 
+    #get id of the composition
+    file_name=performance_path.split('/')[-1]
+    try:
+        id=musicnet_df.loc[musicnet_df['id'] == int(file_name.split('.')[0])]['id'].values[0]
+    except:
+        print('Error with id: ', file_name.split('.')[0])
+        return random_composition_performance()
+    if id in badly_annotated:
+        print('Badly annotated composition, trying again')
+        return random_composition_performance()
     return (performance_path)
 
 
 ##################################
 #           AUXILIARY            #
 
-
+def get_path_from_id(id):
+    """
+    Param: 
+        id of the composition, an integer number.
+    Returns:
+        path of the composition with the given id.
+    Get the path of a given ID.
+    """
+    #Go into data and search in all subfolders recursively for the file with the same name as the id
+    #ignore folder synthesized data
+    path_to_data='data' 
+    for root, dirs, files in os.walk(path_to_data):
+        for name in files:
+            if name.split('.')[0]==str(id):
+                return os.path.join(root, name)
+            
 def get_path(id,midi_list):
     """
     Param: 
@@ -222,3 +265,18 @@ def get_synthesized_data_list():
     path_to_midi='data/synthesized_data'
     midi_files = [os.path.join(path_to_midi, f) for f in os.listdir(path_to_midi) if f.endswith('.wav')]
     return midi_files
+
+
+def get_performances_list():
+    """
+    Get a list of all the full path to the performances in the dataset.
+    """
+    path_to_performances='data/'
+    performances_files = []
+    #loop through all subfolders except synthesized_data and get wavs
+    for root, dirs, files in os.walk(path_to_performances):
+        if root.split('/')[-1]!='synthesized_data':
+            for name in files:
+                if name.endswith('.wav'):
+                    performances_files.append(os.path.join(root, name))
+    return performances_files

@@ -36,11 +36,17 @@ class DTWMatcher:
             features = (features - features_mean) / features_std
             """
 
-            
-        if mode == 'cqt':
-            features = librosa.cqt(audio_frame, sr=sr, hop_length=stride, n_bins=512, bins_per_octave=128)
+        if mode == 'plain_cqt':
+            features = librosa.cqt(audio_frame, sr=sr, hop_length=stride, n_bins=84, bins_per_octave=12)
             features=abs(features)
             features = librosa.amplitude_to_db(features, ref=np.max)
+        if mode == 'cqt':
+            '''
+            features = librosa.cqt(audio_frame, sr=sr, hop_length=stride, n_bins=84, bins_per_octave=12)
+            features=abs(features)
+            features = librosa.amplitude_to_db(features, ref=np.max)
+            '''
+            features = librosa.feature.chroma_cqt(y=audio_frame, sr=sr, hop_length=stride, n_chroma=12, n_octaves=7,bins_per_octave=36)
         if mode =='spectral':
             features = np.abs(librosa.stft(y=audio_frame, hop_length=stride, n_fft=n_fft))**2
             features=abs(features)
@@ -48,6 +54,9 @@ class DTWMatcher:
 
         if mode =='hpcp':
             features = hpcpgram(audio_frame, sampleRate=sr, hopSize=stride, frameSize=n_fft)
+        
+        if mode =='cens':
+            features = librosa.feature.chroma_cens(audio_frame, sr=sr, hop_length=stride)
             
         return features
 
@@ -175,21 +184,24 @@ def create_lakh_database(MatcherInstance, audio_folder, duration=None, n_fft=409
 
     """
     features_dict = {}
-
+    
     for file_name in os.listdir(audio_folder):
         if file_name.endswith(".mp3"):
-            file_path = os.path.join(audio_folder, file_name)
-            audio_frame, sr = librosa.load(file_path, sr=sr, duration=duration)
+            try: 
+                file_path = os.path.join(audio_folder, file_name)
 
-            if duration is None:
-                features = MatcherInstance.extract_features(audio_frame, sr=sr, n_fft=n_fft, stride=stride, mode=mode)
-            else:
-                features = MatcherInstance.extract_features(audio_frame, sr=sr, n_fft=n_fft, stride=stride, mode=mode)
-            
-            id = file_name.split(".")[0]            #print(id, " ", features.shape)
+                
+                audio_frame, sr = librosa.load(file_path, sr=sr, duration=duration)
 
-            features_dict[id] = features
+                features = MatcherInstance.extract_features(audio_frame, sr=sr, n_fft=n_fft, stride=stride, mode=mode)                    
 
+                    #if found KeyError exception, print file_name and continue
+                id = file_name.split(".")[0]            #print(id, " ", features.shape)
+
+                features_dict[id] = features
+            except KeyError:
+                print(file_name + " had a KeyError")
+                continue
     print("Feature dict created")
     return features_dict
 
